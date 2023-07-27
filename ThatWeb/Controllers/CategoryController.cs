@@ -25,6 +25,10 @@ namespace ThatWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
+            if (obj.Name == obj.DisplayOrder.ToString())
+            {
+                ModelState.AddModelError("name", "Name cannot be identical to display order.");
+            }
             if(ModelState.IsValid)
             {
             _db.Categories.Add(obj);
