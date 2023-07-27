@@ -36,6 +36,7 @@ namespace ThatWeb.Controllers
             {
             _db.Categories.Add(obj);
             _db.SaveChanges();
+                TempData["success"] = "The Category has been created successfully.";
             return RedirectToAction("Index");
             }
             return View();
@@ -60,6 +61,7 @@ namespace ThatWeb.Controllers
             {
                 _db.Categories.Update(obj);
                 _db.SaveChanges();
+                    TempData["success"] = "The Category has been updated successfully.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -72,7 +74,7 @@ namespace ThatWeb.Controllers
             Category? categoryFromDb = _db.Categories.Find(id);
 
             if (categoryFromDb == null) return NotFound();
-
+             
             return View(categoryFromDb);
         }
         [HttpPost, ActionName("Delete")]
@@ -84,6 +86,7 @@ namespace ThatWeb.Controllers
             if (categoryFromDb == null) return NotFound();
             _db.Categories.Remove(categoryFromDb);
             _db.SaveChanges();
+                TempData["success"] = "The Category has been deleted successfully.";
             return RedirectToAction("Index");
         }
     }
