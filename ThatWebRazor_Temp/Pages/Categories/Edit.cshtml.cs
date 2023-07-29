@@ -24,9 +24,13 @@ namespace ThatWebRazor_Temp.Pages.Categories
         }
         public IActionResult OnPost() 
         {
+            if(ModelState.IsValid) 
+            {
             _db.Categories.Update(Category);
             _db.SaveChanges();
             return RedirectToPage("Index");
+            }
+            return Page();
         }
     }
 }

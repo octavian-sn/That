@@ -23,9 +23,10 @@ namespace ThatWebRazor_Temp.Pages.Categories
                 Category = categoryFromDb;
             }
         }
-        public IActionResult OnPost(int id)
+        public IActionResult OnPost()
         {
             //Category categoryFromDb = _db.Categories.Find(Category);
+            if (Category == null) return NotFound();
             _db.Categories.Remove(Category);
             _db.SaveChanges();
             return RedirectToPage("Index");
