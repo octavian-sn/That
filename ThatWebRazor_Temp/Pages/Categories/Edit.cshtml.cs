@@ -28,7 +28,7 @@ namespace ThatWebRazor_Temp.Pages.Categories
             {
             _db.Categories.Update(Category);
             _db.SaveChanges();
-                TempData["success"] = "The category has been edited succesfully.";
+                TempData["success"] = "The category has been updated successfully.";
             return RedirectToPage("Index");
             }
             return Page();

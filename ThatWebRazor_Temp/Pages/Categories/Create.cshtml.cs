@@ -23,7 +23,7 @@ namespace ThatWebRazor_Temp.Pages.Categories
         {
             _db.Categories.Add(Category);
             _db.SaveChanges();
-            TempData["succes"] = "The category has been created succesfully.";
+            TempData["succes"] = "The category has been created successfully.";
             return RedirectToPage("Index");
         }
     }

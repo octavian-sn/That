@@ -29,7 +29,7 @@ namespace ThatWebRazor_Temp.Pages.Categories
             if (Category == null) return NotFound();
             _db.Categories.Remove(Category);
             _db.SaveChanges();
-            TempData["success"] = "The category has been deleted succesfully.";
+            TempData["success"] = "The category has been deleted successfully.";
             return RedirectToPage("Index");
         }
     }
