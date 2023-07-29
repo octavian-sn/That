@@ -16,8 +16,11 @@ namespace ThatWebRazor_Temp.Pages.Categories
         }
         public void OnGet(int id)
         {
+            if (id != 0 && id != null)
+            {
             Category categoryFromDb = _db.Categories.Find(id);
             Category = categoryFromDb;
+            }
         }
         public IActionResult OnPost() 
         {
