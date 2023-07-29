@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace ThatWeb.Migrations
+namespace That.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddCategoryTableToDb : Migration

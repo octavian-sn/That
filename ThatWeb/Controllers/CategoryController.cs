@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ThatWeb.Data;
-using ThatWeb.Models;
+using That.DataAccess.Data;
+using That.Models;
 
 namespace ThatWeb.Controllers
 {

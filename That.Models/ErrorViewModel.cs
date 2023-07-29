@@ -1,4 +1,4 @@
-namespace ThatWeb.Models
+namespace That.Models
 {
     public class ErrorViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ThatWeb.Models;
+using That.Models;
 
-namespace ThatWeb.Data
+namespace That.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

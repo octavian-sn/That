@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace ThatWeb.Migrations
+namespace That.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class SeeCategoryTable : Migration
