@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.33913.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThatWeb", "ThatWeb\ThatWeb.csproj", "{BE4621A0-81F8-44EA-B1FB-AC3C56CE9EE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThatWebRazor_Temp", "ThatWebRazor_Temp\ThatWebRazor_Temp.csproj", "{574B65C4-8788-4BE8-AEFA-85798F0F72EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThatWebRazor_Temp", "ThatWebRazor_Temp\ThatWebRazor_Temp.csproj", "{574B65C4-8788-4BE8-AEFA-85798F0F72EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
