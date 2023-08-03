@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using That.DataAccess.Repository.IRepository;
 using That.Models;
 
@@ -17,6 +18,13 @@ namespace ThatWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             List<Product> objProductList = _unitOfWork.Product.GetAll().ToList();
+            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                /* Using projections in EF Core */
+                .GetAll().Select(u=> new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
             return View(objProductList);
         }
 
@@ -27,10 +35,6 @@ namespace ThatWeb.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
-            if (product.Title == product.Author) 
-            {
-                ModelState.AddModelError("title", "Title cannot be identical to Author.");
-            }
             if (ModelState.IsValid)
             {
                 _unitOfWork.Product.Add(product);
