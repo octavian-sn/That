@@ -42,6 +42,16 @@
             <label asp-for="Price100" class="p-0"></label>
             <input asp-for="Price100" class="form-control" />
         </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="CategoryId" class="p-0"></label>
+            <select asp-for="CategoryId" asp-items="ViewBag.CategoryList" class="p-0">
+                <option disabled selected>--Select Category--</option>
+            </select>
+        </div>
+        <div class="mb-3 row p-1">
+            <label asp-for="ImageUrl" class="p-0"></label>
+            <input asp-for="ImageUrl" class="form-control" />
+        </div>
 
         <div class="row">
             <div class="col-6 col-md-3">
