@@ -22,18 +22,8 @@ namespace ThatWeb.Areas.Admin.Controllers
             return View(objProductList);
         }
 
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            /*@IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
-                //Using projections in EF Core
-                .GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.Name,
-                    Value = u.Id.ToString(),
-                });*/
-
-            //ViewBag.CategoryList = CategoryList;
-            //ViewData["CategoryList"] = CategoryList;
             ProductVM productVM = new ProductVM()
             {
                 /* Using projections in EF Core */
@@ -44,9 +34,18 @@ namespace ThatWeb.Areas.Admin.Controllers
                 }),
                 Product = new Product()
             };
-            return View(productVM);
+            //Create
+            if (id == 0 || id == null) return View(productVM);
+            else
+            //Edit
+            {
+                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                return View(productVM);
+            }
+
         }
         [HttpPost]
+        //Edit the name, pass it the IFormFile?
         public IActionResult Create(ProductVM productVM)
         {
             if (ModelState.IsValid)
@@ -67,7 +66,7 @@ namespace ThatWeb.Areas.Admin.Controllers
             }
         }
 
-        public IActionResult Edit(int? id)
+        /*public IActionResult Edit(int? id)
         {
             if (id == null || id == 0) return NotFound();
             Product productFromDb = _unitOfWork.Product.Get(item => item.Id == id);
@@ -85,7 +84,7 @@ namespace ThatWeb.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-        }
+        }*/
 
         public IActionResult Delete(int? id)
         {
