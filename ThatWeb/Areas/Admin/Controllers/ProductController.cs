@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using That.DataAccess.Repository.IRepository;
 using That.Models;
+using That.Models.ViewModel;
 
 namespace ThatWeb.Areas.Admin.Controllers
 {
@@ -23,16 +24,28 @@ namespace ThatWeb.Areas.Admin.Controllers
 
         public IActionResult Create()
         {
-            IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+            /*@IEnumerable<SelectListItem> CategoryList = _unitOfWork.Category
+                //Using projections in EF Core
+                .GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });*/
+
+            ProductVM productVM = new ProductVM()
+            {
+                CategoryList = _unitOfWork.Category
                 /* Using projections in EF Core */
                 .GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString(),
-                });
-            ViewBag.CategoryList = CategoryList;
+                }),
+                Product = new Product()
+            };
+            //ViewBag.CategoryList = CategoryList;
             //ViewData["CategoryList"] = CategoryList;
-            return View();
+            return View(productVM);
         }
         [HttpPost]
         public IActionResult Create(Product product)
