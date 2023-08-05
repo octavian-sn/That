@@ -57,7 +57,7 @@ namespace ThatWeb.Areas.Admin.Controllers
                 if (file != null)
                 {
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string saveLocation = Path.Combine(wwwRootPath, @"\images\product");
+                    string saveLocation = Path.Combine(wwwRootPath, @"images\product");
 
                     using (var fileStream = new FileStream(Path.Combine(saveLocation, fileName), FileMode.Create))
                     {
