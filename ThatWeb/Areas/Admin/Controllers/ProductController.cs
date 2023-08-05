@@ -32,32 +32,39 @@ namespace ThatWeb.Areas.Admin.Controllers
                     Value = u.Id.ToString(),
                 });*/
 
+            //ViewBag.CategoryList = CategoryList;
+            //ViewData["CategoryList"] = CategoryList;
             ProductVM productVM = new ProductVM()
             {
-                CategoryList = _unitOfWork.Category
                 /* Using projections in EF Core */
-                .GetAll().Select(u => new SelectListItem
+                CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString(),
                 }),
                 Product = new Product()
             };
-            //ViewBag.CategoryList = CategoryList;
-            //ViewData["CategoryList"] = CategoryList;
             return View(productVM);
         }
         [HttpPost]
-        public IActionResult Create(Product product)
+        public IActionResult Create(ProductVM productVM)
         {
             if (ModelState.IsValid)
             {
-                _unitOfWork.Product.Add(product);
+                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "The Product has been added successfully.";
                 return RedirectToAction("Index");
             }
-            return View();
+            else
+            {
+                productVM.CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString(),
+                });
+                return View(productVM);
+            }
         }
 
         public IActionResult Edit(int? id)
