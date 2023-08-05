@@ -3,7 +3,7 @@
 <form method="post" enctype="multipart/form-data">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">Add Product</h2>
+            <h2 class="text-primary">@(Model.Product.Id != 0 ? "Edit" : "Create") Product</h2>
             <hr />
         </div>
         @* Validation for all messages *@
@@ -55,7 +55,14 @@
 
         <div class="row">
             <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary form-control">Add</button>
+                @if (Model.Product.Id != 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Edit</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control">Add</button>
+                }
             </div>
             <div class="col-6 col-md-3">
                 <a asp-controller="Product" asp-action="Index" class="btn btn-secondary border form-control">Back to List</a>
