@@ -59,6 +59,15 @@ namespace ThatWeb.Areas.Admin.Controllers
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                     string saveLocation = Path.Combine(wwwRootPath, @"images\product");
 
+                    if (!string.IsNullOrEmpty(productVM.Product.ImageUrl))
+                    {
+                        string oldImgPath = Path.Combine(wwwRootPath, productVM.Product.ImageUrl.Trim('\\'));
+                        if (System.IO.File.Exists(oldImgPath))
+                        {
+                            System.IO.File.Delete(oldImgPath);
+                        }
+                    }
+
                     using (var fileStream = new FileStream(Path.Combine(saveLocation, fileName), FileMode.Create))
                     {
                         file.CopyTo(fileStream);
@@ -66,8 +75,15 @@ namespace ThatWeb.Areas.Admin.Controllers
 
                     productVM.Product.ImageUrl = @"\images\product\" + fileName;
                 }
+                if (productVM.Product.Id == 0)
+                {
+                    _unitOfWork.Product.Add(productVM.Product);
+                }
+                else
+                {
+                    _unitOfWork.Product.Update(productVM.Product);
+                }
 
-                _unitOfWork.Product.Add(productVM.Product);
                 _unitOfWork.Save();
                 TempData["success"] = "The Product has been added successfully.";
                 return RedirectToAction("Index");
