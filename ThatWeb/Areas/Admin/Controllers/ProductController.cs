@@ -99,26 +99,6 @@ namespace ThatWeb.Areas.Admin.Controllers
             }
         }
 
-        /*public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0) return NotFound();
-            Product productFromDb = _unitOfWork.Product.Get(item => item.Id == id);
-            if (productFromDb == null) return NotFound();
-            return View(productFromDb);
-        }
-        [HttpPost]
-        public IActionResult Edit(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                _unitOfWork.Product.Update(product);
-                _unitOfWork.Save();
-                TempData["success"] = "The Product has been updated successfully.";
-                return RedirectToAction("Index");
-            }
-            return View();
-        }*/
-
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0) return NotFound();
@@ -135,5 +115,16 @@ namespace ThatWeb.Areas.Admin.Controllers
             TempData["success"] = "The Product has been removed successfully.";
             return RedirectToAction("Index");
         }
+
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll() 
+        {
+            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            return Json(new { data = objProductList });
+        }
+
+        #endregion
     }
 }
