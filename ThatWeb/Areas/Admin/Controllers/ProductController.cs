@@ -111,20 +111,20 @@ namespace ThatWeb.Areas.Admin.Controllers
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var productToBeDleted = _unitOfWork.Product.Get(u => u.Id == id);
-            if (productToBeDleted == null) 
+            var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+            if (productToBeDeleted == null) 
             {
                 return Json(new { success = false, message = "Error while deleting" });
             }
 
             //Delete the image
-            string oldImgPath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDleted.ImageUrl.TrimStart('\\'));
+            string oldImgPath = Path.Combine(_webHostEnvironment.WebRootPath, productToBeDeleted.ImageUrl.TrimStart('\\'));
             if (System.IO.File.Exists(oldImgPath))
             {
                 System.IO.File.Delete(oldImgPath);
             }
             //Delete the product
-            _unitOfWork.Product.Remove(productToBeDleted);
+            _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
 
             return Json(new { success = true, message = "Delete successful" });
